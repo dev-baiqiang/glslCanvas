@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>GlslCanvas</title>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <script type="text/javascript" src="dist/GlslCanvas.js"></script>
+
+</head>
+<body>
+<canvas id="glslCanvas" class="glslCanvas" data-fragment="
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+vec2 center = normu_resolution/2.;
+            float speed = 0.5;
+        void main(){
+            float invAr = u_resolution.y / u_resolution.x;
+        
+            vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                
+            vec3 col = vec4(uv,0.5+0.5*sin(u_time),1.0).xyz;
+           
+             vec3 texcol;
+                    
+            float x = (center.x-uv.x);
+            float y = (center.y-uv.y) *invAr;
+                
+            float r = -sqrt(x*x + y*y); //uncoment this line to symmetric ripples
+            //float r = -(x*x + y*y);
+            float z = 1.0 + 0.5*sin((r+u_time*speed)/0.013);
+            
+            texcol.x = z;
+            texcol.y = z;
+            texcol.z = z;
+            
+            gl_FragColor = vec4(col*texcol,1.0);
+        }
+
+" width="800" height="600"></canvas>
+
+</body>
+
+<script src="js/main.js"></script>
+</html>

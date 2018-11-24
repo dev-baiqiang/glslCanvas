@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>GlslCanvas</title>
+
+        <link rel="stylesheet" href="css/reset.css">
+        <script type="text/javascript" src="dist/GlslCanvas.js"></script>
+
+    </head>
+    <body>
+        <canvas id="glslCanvas" class="glslCanvas" data-fragment="
+#ifdef GL_ES
+precision highp float;
+#endif
+
+
+#define PI 3.14159265359
+
+mat2 rotate2d(float _angle){
+    return mat2(cos(_angle),-sin(_angle), sin(_angle),cos(_angle));
+}
+
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+void main() {
+    vec2 st = gl_FragCoord.xy/u_resolution;
+
+    float x = smoothstep( 0.6, 0.8, st.x) - smoothstep( 0.8, 1.0, st.x);
+	gl_FragColor = vec4(x, 0.0, 0., 1.0);
+}
+
+" width="400" height="400"></canvas>
+
+    </body>
+
+    <script src="js/main.js"></script>
+</html>

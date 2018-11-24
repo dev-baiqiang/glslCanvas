@@ -6,13 +6,6 @@
     <link rel="stylesheet" href="css/reset.css">
     <script type="text/javascript" src="dist/GlslCanvas.js"></script>
 
-    <style>
-        body {
-            background: #000000;
-        }
-
-    </style>
-
 </head>
 <body>
 <canvas id="glslCanvas" data-fragment="
@@ -21,11 +14,6 @@
 precision mediump float;
 #endif
 
-uniform vec2 u_resolution;
-uniform vec2 u_mouse;
-uniform float u_time;
-
-void main() {
 	vec2 st = gl_FragCoord.xy / u_resolution;
 
 	float x = step(0.5, st.x);
@@ -35,12 +23,7 @@ void main() {
 
 " width="800" height="400"></canvas>
 
-<script>
-    var canvas = document.getElementById("glslCanvas");
-    var sandbox = new GlslCanvas(canvas);
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-</script>
+<script src="js/main.js"></script>
 
 </body>
 
